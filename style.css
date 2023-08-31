@@ -1,0 +1,20 @@
+body{
+    background-color: black;
+    color: wheat;
+    display: flex;    
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.container {
+    height: 200px;
+    display: flex;    
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+button {
+    background-color: bisque;
+    flex: auto;
+}
+

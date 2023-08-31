@@ -1,24 +1,28 @@
-let playerChoice
-let computerChoice
 let playerScore = 0
 let computerScore = 0
 
-const choices = ['rock', 'paper', 'scissors']
 
-function getComputerChoice(){
-    const choice = choices[Math.floor(Math.random() * choices.length)]
-    return choice
+
+function disableBtn() {
+    btn.forEach(button => {
+        button.disabled = true
+    })
 }
 
-function playRound(playerChoice, computerChoice){
-    playerChoice = prompt('Choose: rock, paper, or scissors').toLowerCase()
-    computerChoice = getComputerChoice()
+function getComputerChoice(){
+    const choices = ['rock', 'paper', 'scissors']
+    return choices[Math.floor(Math.random() * choices.length)]
+}
 
-    if(!((playerChoice.includes('rock')) || (playerChoice.includes('paper')) || (playerChoice.includes('scissors')))){
-        console.log(playRound())
-    }
-    else if(playerChoice === computerChoice){
-        return 'Draw'
+function playRound(playerChoice){
+    let computerChoice = getComputerChoice()
+    playerChoice = playerChoice.toLowerCase()
+    let result = ''
+
+    if(playerChoice === computerChoice){
+        result = `Draw!\n 
+                  Your score: ${playerScore}\n 
+                  Computer score: ${computerScore}`
     }
     else if(
         (playerChoice === 'rock' && computerChoice === 'scissors') || 
@@ -26,23 +30,34 @@ function playRound(playerChoice, computerChoice){
         (playerChoice === 'scissors' && computerChoice === 'paper')
         ){
         playerScore = ++playerScore
-        return 'You Win!'
+        result = `You Win!\n 
+                  Your score: ${playerScore}\n 
+                  Computer score: ${computerScore}`
+
+        if(playerScore === 5){
+            result = `You are the first to reach 5 points, you win!\nReload the page to play again`
+            disableBtn()
+        }
     }
     else{
         computerScore = ++computerScore
-        return 'You Lose!'
+        result = `You Lose!\n 
+                  Your score: ${playerScore}\n 
+                  Computer score: ${computerScore}`
+
+        if(computerScore === 5){
+            result = `Computer was the first to reach 5 points, you lose!\nReload the page to play again, better luck next time!`
+            disableBtn()
+        }
     }
+
+    document.getElementById('result').innerText = result
 }
 
-function game(){
+const btn = document.querySelectorAll('button')
 
-    console.log(playRound(playerChoice, computerChoice))
-    console.log(playRound(playerChoice, computerChoice))
-    console.log(playRound(playerChoice, computerChoice))
-    console.log(playRound(playerChoice, computerChoice))
-    console.log(playRound(playerChoice, computerChoice))
-
-    return `Your score is ${playerScore}, computer score is ${computerScore}`
-}
-
-console.log(game());
+btn.forEach(button =>{
+    button.addEventListener('click', () => {
+        playRound(button.value)
+    })
+})
