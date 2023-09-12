@@ -20,7 +20,7 @@ function playRound(playerChoice){
     let result = ''
 
     if(playerChoice === computerChoice){
-        result = `Draw!\n 
+        result = `Draw! Computer chose ${computerChoice}\n 
                   Your score: ${playerScore}\n 
                   Computer score: ${computerScore}`
     }
@@ -30,7 +30,7 @@ function playRound(playerChoice){
         (playerChoice === 'scissors' && computerChoice === 'paper')
         ){
         playerScore = ++playerScore
-        result = `You Win!\n 
+        result = `You Win! Computer chose ${computerChoice}\n 
                   Your score: ${playerScore}\n 
                   Computer score: ${computerScore}`
 
@@ -41,7 +41,7 @@ function playRound(playerChoice){
     }
     else{
         computerScore = ++computerScore
-        result = `You Lose!\n 
+        result = `You Lose! Computer chose ${computerChoice}\n 
                   Your score: ${playerScore}\n 
                   Computer score: ${computerScore}`
 
